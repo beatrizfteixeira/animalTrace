@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mapa do Google</title>
+  </head>
+  <body>
+    <div>
+      Digite aqui um local de referência para a propriedade<input type="text" id="endereco" placeholder="Digite um endereço" />
+      <button onclick="pesquisar()">Pesquisar</button>
+    </div>
+    <div id="map" style="height: 500px;"></div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=drawing"></script>
+    <div id="map" style="height: 500px;"></div>
+    <script>
+      var mapa
+      var drawingManager
+      var poligono
+      
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById("map"), {
+          center: { lat: -34.397, lng: 150.644 },
+          zoom: 2,
+        });
+        const drawingManager = new google.maps.drawing.DrawingManager({
+          drawingMode: google.maps.drawing.OverlayType.POLYGON,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: [
+              google.maps.drawing.OverlayType.POLYGON,
+              google.maps.drawing.OverlayType.POLYLINE,
+              google.maps.drawing.OverlayType.CIRCLE,
+              google.maps.drawing.OverlayType.RECTANGLE,
+            ],
+          },
+          markerOptions: {
+            icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+          },
+          circleOptions: {
+            fillColor: "#ffff00",
+            fillOpacity: 1,
+            strokeWeight: 5,
+            clickable: false,
+            editable: true,
+            zIndex: 1,
+          },
+        });
+        
+        drawingManager.setMap(map);
+        mapa = map
+        google.maps.event.addListener(drawingManager, "overlaycomplete", function (event) {
+          if (event.type === google.maps.drawing.OverlayType.POLYGON) {
+              var coordenadas = event.overlay.getPath().getArray();
+              alert(coordenadas);
+          }
+      });
+      }
+      
+      function ativarDesenho() {
+        drawingManager.setMap(mapa)
+      }
+      
+      function salvarCoordenadas() {
+        if (poligono) {
+          var coordenadas = poligono.getPath().getArray()
+          console.log(coordenadas)
+        } else {
+          alert('Desenhe um polígono primeiro.')
+        }
+      }
+      function pesquisar() {
+        var endereco = document.getElementById('endereco').value
+      
+        var geocoder = new google.maps.Geocoder()
+        geocoder.geocode({ address: endereco }, function (results, status) {
+            if (status === 'OK') {
+              var lat = results[0].geometry.location.lat();
+              var lng = results[0].geometry.location.lng();
+        
+              var posicao = new google.maps.LatLng(lat, lng);
+              mapa.setCenter(posicao);
+              mapa.setZoom(14);
+              new google.maps.Marker({
+                position: posicao,
+                map: mapa,
+              });
+            } else {
+              alert('Não foi possível encontrar o endereço.');
+            }
+          });
+      }
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=drawing"></script>
+    <button onclick="ativarDesenho()">Desenhar Polígono</button>
+    <button onclick="salvarCoordenadas()">Salvar Coordenadas</button>  
+</body>
+</html>
