@@ -6,7 +6,7 @@ O sistema de Gerenciamento de Localização de Animais na Fazenda tem como objet
 ## Como inicializar o servidor?
 - git [clone link do repositório]
 - python -m venv venv 
-- venv\Scripts\activate.bat
+- venv\Scripts\activate.bat (no cmd)
 - pip install django
 - pip install python-decouple
 
