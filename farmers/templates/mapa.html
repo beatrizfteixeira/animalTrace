@@ -10,41 +10,16 @@
             margin-bottom: 20px;
         }
     </style>
-</head>
-
-<body>
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6">
-                <div class="input-group mb-3">
-                    <input type="text" id="endereco" class="form-control" placeholder="Digite um endereço" />
-                    <button onclick="pesquisar()" class="btn btn-primary">Pesquisar</button>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div id="map"></div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <button onclick="ativarDesenho()" class="btn btn-secondary me-2">Desenhar Polígono</button>
-                <button onclick="salvarCoordenadas()" class="btn btn-primary">Salvar Coordenadas</button>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=drawing"></script>
-    <script>
+    <script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&libraries=drawing"></script>
+    <script defer >
         var mapa
         var drawingManager
         var poligono
 
         function initMap() {
             var map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 2,
+                center: { lat: -21.2316426, lng: -44.9972724 },
+                zoom: 15,
             });
             const drawingManager = new google.maps.drawing.DrawingManager({
                 drawingMode: google.maps.drawing.OverlayType.POLYGON,
@@ -118,6 +93,30 @@
     </script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=drawing"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="input-group mb-3">
+                    <input type="text" id="endereco" class="form-control" placeholder="Digite um endereço" />
+                    <button onclick="pesquisar()" class="btn btn-primary">Pesquisar</button>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div id="map"></div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <button onclick="ativarDesenho()" class="btn btn-secondary me-2">Desenhar Polígono</button>
+                <button onclick="salvarCoordenadas()" class="btn btn-primary">Salvar Coordenadas</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
