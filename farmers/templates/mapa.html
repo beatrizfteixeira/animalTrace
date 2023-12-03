@@ -14,7 +14,7 @@
     <script defer >
         var mapa
         var drawingManager
-        var poligono
+        var poligono = "";
 
         function initMap() {
             var map = new google.maps.Map(document.getElementById("map"), {
@@ -50,8 +50,7 @@
             mapa = map
             google.maps.event.addListener(drawingManager, "overlaycomplete", function (event) {
                 if (event.type === google.maps.drawing.OverlayType.POLYGON) {
-                    var coordenadas = event.overlay.getPath().getArray();
-                    alert(coordenadas);
+                    poligono = event.overlay.getPath().getArray()
                 }
             });
         }
@@ -61,9 +60,24 @@
         }
 
         function salvarCoordenadas() {
-            if (poligono) {
-                var coordenadas = poligono.getPath().getArray()
-                console.log(coordenadas)
+            if (poligono != "") {
+                var arrayCoordenadas = poligono.map(function(coord) {
+                    return { latitude: coord.lat(), longitude: coord.lng() };
+                });
+                var jsonCoordenadas = JSON.stringify(arrayCoordenadas, null, 2);
+
+                console.log(jsonCoordenadas);
+                fetch('http://localhost:8000/coordenadas/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: jsonCoordenadas,
+                }).then(response => response.json()).then(data => {
+                    console.log('Resposta do servidor:', data);
+                }).catch(error => {
+                    console.error('Erro na solicitação:', error);
+                });
             } else {
                 alert('Desenhe um polígono primeiro.')
             }
