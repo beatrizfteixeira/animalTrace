@@ -1,5 +1,7 @@
+from django.http import JsonResponse
 from django.shortcuts import render
 from project import settings
+import json
 
 def mapa(request):
     context = {
@@ -14,3 +16,9 @@ def login(request):
 
 def signup(request):
     return render(request, 'signup.html')
+
+def recebe_coordenadas(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        return JsonResponse({'sucesso': data}, status=200)
+    return JsonResponse({'error': 'erro'}, status=500)
