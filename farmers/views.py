@@ -2,6 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import render
 from project import settings
 from .models import Animal
+from .models import Coordenada
 
 import pyrebase
 
@@ -55,10 +56,37 @@ def animal(request):
         "longitude": animal_instance.longitude
     })
 
-
-
 def recebe_coordenadas(request):
-    if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
-        return JsonResponse({'sucesso': data}, status=200)
+    if request.method == 'POST':        
+        json_data = json.loads(request.body.decode('utf-8'))
+        for data in json_data:
+            latitude = data['latitude']
+            longitude = data['longitude']
+            Coordenada.objects.create(latitude=latitude, longitude=longitude)
+        return JsonResponse({'sucesso': json_data}, status=200)  
+
     return JsonResponse({'error': 'erro'}, status=500)
+
+def mapa_controle(request):
+    # Obtenha as latitudes e longitudes do banco de dados ou de onde você as armazenou
+    coordenadas = [{
+                        'lat': -21.225307757471317,
+                        'lng': -44.979793524328606
+                    },
+                    {
+                        'lat': -21.225442771375494,
+                        'lng': -44.97981229979171
+                    },
+                    {
+                        'lat': -21.225450272144315,
+                        'lng': -44.97961113411559
+                    },
+                    {
+                        'lat': -21.225312757988497,
+                        'lng': -44.979584312025445
+                    }]
+
+    # Passe as coordenadas para o template
+    coordenadas_json = json.dumps(coordenadas)
+
+    return render(request, 'mapa_controle.html', {'coordenadas_json': coordenadas_json})
