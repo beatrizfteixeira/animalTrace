@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Mapa do Google</title>
+    <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
+        body{
+            overflow: hidden;
+            background-color: #d5d5d5;
+        }
+        header{            
+            display: flex;
+            align-items: center;
+            background: #3c096c;
+            color:  white;
+            height: 8vh;
+            width: 100vw;
+        }
+        h3{
+            align-self: center;
+            text-align: center;
+            width: 100%;
+        }
+        .container-principal{
+            width: 100%;
+            margin: 0;
+        }
         #map {
-            height: 500px;
+            height: 73vh;
             margin-bottom: 20px;
         }
     </style>
-    <script defer >
+    <!-- Styles -->
+
+    <!-- Scripts -->
+    <script defer>
         var mapa
-        var drawingManager
         var poligono = "";
 
         function initMap() {
@@ -27,21 +50,10 @@
                     position: google.maps.ControlPosition.TOP_CENTER,
                     drawingModes: [
                         google.maps.drawing.OverlayType.POLYGON,
-                        google.maps.drawing.OverlayType.POLYLINE,
-                        google.maps.drawing.OverlayType.CIRCLE,
-                        google.maps.drawing.OverlayType.RECTANGLE,
                     ],
                 },
                 markerOptions: {
                     icon: "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-                },
-                circleOptions: {
-                    fillColor: "#ffff00",
-                    fillOpacity: 1,
-                    strokeWeight: 5,
-                    clickable: false,
-                    editable: true,
-                    zIndex: 1,
                 },
             });
 
@@ -54,10 +66,6 @@
             });
         }
 
-        function ativarDesenho() {
-            drawingManager.setMap(mapa)
-        }
-
         function salvarCoordenadas() {
             if (poligono != "") {
                 var arrayCoordenadas = poligono.map(function(coord) {
@@ -65,7 +73,6 @@
                 });
                 var jsonCoordenadas = JSON.stringify(arrayCoordenadas, null, 2);
 
-                console.log(jsonCoordenadas);
                 fetch('http://localhost:8000/coordenadas/', {
                     method: 'POST',
                     headers: {
@@ -73,9 +80,17 @@
                     },
                     body: jsonCoordenadas,
                 }).then(response => response.json()).then(data => {
-                    console.log('Resposta do servidor:', data);
+                    var userResponse = window.confirm('Coordenadas salvas com sucesso!\nDeseja ir para o painel de controle?');
+
+                    if (userResponse) {
+                        // Redirecionar para o painel de controle
+                        window.location.href = 'http://localhost:8000/mapa_controle';
+                    } else {
+                        // Limpar o desenho no mapa
+                        window.location.reload();
+                    }
                 }).catch(error => {
-                    console.error('Erro na solicitação:', error);
+                    alert('Não foi possível salvar a região delimitada!')
                 });
             } else {
                 alert('Desenhe um polígono primeiro.')
@@ -103,33 +118,43 @@
                 }
             });
         }
-    </script>
 
+        function abrirPainel() {
+            window.location.href = 'http://localhost:8000/mapa_controle';
+        }
+
+        function verificarEnter(event) {
+            if (event.key === 'Enter') {
+                pesquisar();
+            }
+        }
+    </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap&libraries=drawing"></script>
+    <!-- Scripts -->
 </head>
 
 <body>
-    <div class="container">
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-6">
+    <header>
+        <h3>Cadastro de região</h3>
+    </header>
+    <div class="container-principal">
+        <div class="row justify-content-center mt-2">
+            <div class="px-5">
                 <div class="input-group mb-3">
-                    <input type="text" id="endereco" class="form-control" placeholder="Digite um endereço" />
+                    <input type="text" id="endereco" class="form-control" placeholder="Digite um endereço" onkeypress="verificarEnter(event)"/>
                     <button onclick="pesquisar()" class="btn btn-primary">Pesquisar</button>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="px-5">
                 <div id="map"></div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <button onclick="ativarDesenho()" class="btn btn-secondary me-2">Desenhar Polígono</button>
-                <button onclick="salvarCoordenadas()" class="btn btn-primary">Salvar Coordenadas</button>
-            </div>
+        <div class="d-flex flex-row w-100 justify-content-between px-5">
+            <button onclick="abrirPainel()" class="btn btn-primary">Ir para o painel de controle</button>
+            <button onclick="salvarCoordenadas()" class="btn btn-primary">Salvar Coordenadas</button>
         </div>
     </div>
 </body>
-
 </html>
