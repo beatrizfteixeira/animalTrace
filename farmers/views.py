@@ -68,6 +68,11 @@ def recebe_coordenadas(request):
 
     return JsonResponse({'error': 'erro'}, status=500)
 
+def obter_coordenadas(request):
+    if request.method == 'GET':  
+        coordenadas = Coordenada.objects.all().values()  # Converte as coordenadas em um dicionário
+        return JsonResponse(list(coordenadas), safe=False)
+
 def mapa_controle(request):
     # Obtenha as latitudes e longitudes do banco de dados ou de onde você as armazenou
     coordenadas = [{

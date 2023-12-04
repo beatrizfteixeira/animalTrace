@@ -1,15 +1,13 @@
 from django.urls import path
 
 from . import views
-from .views import recebe_coordenadas
-from .views import mapa_controle
 
-urlpatterns = [
-    
+urlpatterns = [    
     path('mapa', views.mapa, name='mapa'),
     path('login', views.login , name='login'),
     path('signup', views.signup, name='signup'),
     path('animal', views.animal, name='animal'),
-    path('coordenadas/', recebe_coordenadas, name='coordenadas'),
-    path('mapa_controle', mapa_controle, name='controle')
+    path('coordenadas/', views.recebe_coordenadas, name='coordenadas'),
+    path('mapa_controle', views.mapa_controle, name='controle'),
+    path('obter_coordenadas/', views.obter_coordenadas, name='obter_coordenadas')
 ]
