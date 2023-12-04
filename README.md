@@ -8,18 +8,28 @@ O sistema de Gerenciamento de Localização de Animais na Fazenda tem como objet
 ``` bash
 git clone [link do repositório]
 ```
-- Criar ambiente virtual
+- Criar ambiente virtual (Windows)
 ``` bash
-python -m venv venv 
+python -m venv venv
+```
+- Criar ambiente virtual (Linux)
+``` bash
+python3 -m venv venv
 ```
 - Ativar ambiente virtual (Windows)
 ``` bash
 venv\Scripts\activate.bat
 ```
+- Ativar ambiente virtual (Linux)
+``` bash
+source venv\bin\activate
+```
 - Instalar dependências
 ```bash
 pip install django
 pip install python-decouple
+pip install pyrebase4
+pip install django-cors-headers
 ```
 - Executar o servidor django
 ```bash
