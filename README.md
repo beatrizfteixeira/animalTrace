@@ -26,10 +26,7 @@ source venv\bin\activate
 ```
 - Instalar dependências
 ```bash
-pip install django
-pip install python-decouple
-pip install pyrebase4
-pip install django-cors-headers
+pip install -r requirements.txt
 ```
 - Executar o servidor django
 ```bash
