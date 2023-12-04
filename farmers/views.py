@@ -74,25 +74,4 @@ def obter_coordenadas(request):
         return JsonResponse(list(coordenadas), safe=False)
 
 def mapa_controle(request):
-    # Obtenha as latitudes e longitudes do banco de dados ou de onde você as armazenou
-    coordenadas = [{
-                        'lat': -21.225307757471317,
-                        'lng': -44.979793524328606
-                    },
-                    {
-                        'lat': -21.225442771375494,
-                        'lng': -44.97981229979171
-                    },
-                    {
-                        'lat': -21.225450272144315,
-                        'lng': -44.97961113411559
-                    },
-                    {
-                        'lat': -21.225312757988497,
-                        'lng': -44.979584312025445
-                    }]
-
-    # Passe as coordenadas para o template
-    coordenadas_json = json.dumps(coordenadas)
-
-    return render(request, 'mapa_controle.html', {'coordenadas_json': coordenadas_json})
+    return render(request, 'mapa_controle.html')

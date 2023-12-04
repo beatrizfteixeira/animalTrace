@@ -10,48 +10,45 @@
             margin-bottom: 20px;
         }
     </style>
-    <script>
-        var mapa
-        var drawingManager
+    <script defer>
+        var map;
+        var drawingManager;
         var poligono = "";
 
         function initMap() {
-            var map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: -21.2316426, lng: -44.9972724 },
-                zoom: 15,
-            });
-
-            // coordenadas = [{
-            //                 lat: -21.225307757471317,
-            //                 lng: -44.979793524328606
-            //             },
-            //             {
-            //                 lat: -21.225442771375494,
-            //                 lng: -44.97981229979171
-            //             },
-            //             {
-            //                 lat: -21.225450272144315,
-            //                 lng: -44.97961113411559
-            //             },
-            //             {
-            //                 lat: -21.225312757988497,
-            //                 lng: -44.979584312025445
-            //             }]
-
-            // // Crie um polígono usando as coordenadas
-            // var polygon = new google.maps.Polygon({
-            //     paths: coordenadas,
-            //     geodesic: true,
-            //     strokeColor: "#000",
-            //     strokeOpacity: 1.0,
-            //     strokeWeight: 2,
-            // });
-
-            // polygon.setMap(map);
-        }        
+            
+            
+            var xhr = new XMLHttpRequest();
+            var coordenadas = "";
+            xhr.open('GET', 'http://localhost:8000/obter_coordenadas/', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var coordenadas = JSON.parse(xhr.responseText);
+                    map = new google.maps.Map(document.getElementById("map"), {
+                        center: { lat: coordenadas[0].latitude, lng: coordenadas[0].longitude },
+                        zoom: 15,
+                    });
+                    var polygon = new google.maps.Polygon({
+                        paths: coordenadas.map(function (coord) {
+                            return { lat: coord.latitude, lng: coord.longitude };
+                        }),
+                        strokeColor: '#000',
+                        strokeOpacity: 0.8,
+                        strokeWeight: 2,
+                        fillColor: '#000',
+                        fillOpacity: 0.35,
+                    });
+        
+                    polygon.setMap(map);
+                }
+            };
+            xhr.send();
+            // Crie um polígono usando as coordenadas recuperadas
+        }
     </script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?&callback=initMap&libraries=drawing"></script>
+    <!-- Note que você não precisa mais da biblioteca 'drawing' nesta versão -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_MAPS_API_KEY }}&callback=initMap"></script>
 </head>
 
 <body>
@@ -61,12 +58,6 @@
                 <div id="map"></div>
             </div>
         </div>
-        <!-- <div class="row justify-content-center">
-            <div class="col-md-6">
-                <button onclick="ativarDesenho()" class="btn btn-secondary me-2">Desenhar Polígono</button>
-                <button onclick="salvarCoordenadas()" class="btn btn-primary">Salvar Coordenadas</button>
-            </div>
-        </div> -->
     </div>
 </body>
 
