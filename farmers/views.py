@@ -58,6 +58,7 @@ def animal(request):
 
 def recebe_coordenadas(request):
     if request.method == 'POST':        
+        Coordenada.objects.all().delete()
         json_data = json.loads(request.body.decode('utf-8'))
         for data in json_data:
             latitude = data['latitude']
