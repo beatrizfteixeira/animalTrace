@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Mapa do Google</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        #map {
+            height: 500px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        var mapa
+        var drawingManager
+        var poligono = "";
+
+        function initMap() {
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: -21.2316426, lng: -44.9972724 },
+                zoom: 15,
+            });
+
+            // coordenadas = [{
+            //                 lat: -21.225307757471317,
+            //                 lng: -44.979793524328606
+            //             },
+            //             {
+            //                 lat: -21.225442771375494,
+            //                 lng: -44.97981229979171
+            //             },
+            //             {
+            //                 lat: -21.225450272144315,
+            //                 lng: -44.97961113411559
+            //             },
+            //             {
+            //                 lat: -21.225312757988497,
+            //                 lng: -44.979584312025445
+            //             }]
+
+            // // Crie um polígono usando as coordenadas
+            // var polygon = new google.maps.Polygon({
+            //     paths: coordenadas,
+            //     geodesic: true,
+            //     strokeColor: "#000",
+            //     strokeOpacity: 1.0,
+            //     strokeWeight: 2,
+            // });
+
+            // polygon.setMap(map);
+        }        
+    </script>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?&callback=initMap&libraries=drawing"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div id="map"></div>
+            </div>
+        </div>
+        <!-- <div class="row justify-content-center">
+            <div class="col-md-6">
+                <button onclick="ativarDesenho()" class="btn btn-secondary me-2">Desenhar Polígono</button>
+                <button onclick="salvarCoordenadas()" class="btn btn-primary">Salvar Coordenadas</button>
+            </div>
+        </div> -->
+    </div>
+</body>
+
+</html>
