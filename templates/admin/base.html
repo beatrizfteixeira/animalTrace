@@ -63,6 +63,18 @@
                     <button type="submit">{% translate 'Log out' %}</button>
                 </form>
                 {% include "admin/color_theme_toggle.html" %}
+
+                <div>
+                  <a href="{% url 'mapa' %}">
+                      <button style="background-color: #81D4FA;">Salvar Propriedade</button>
+                  </a>
+                  <div>
+                      <a href="{% url 'controle' %}">
+                          <button style="background-color: #81D4FA;">Localizar Animais</button>
+                      </a>
+                  </div>
+                </div>
+              <!-- Fim dos botões -->
             {% endblock %}
         </div>
         {% endif %}
@@ -111,19 +123,11 @@
           {% endblock %}
           {% block sidebar %}{% endblock %}
           <br class="clear">
-          <div>
-            <a href="{% url 'mapa' %}">
-            <button>Salvar Propriedade</button>
-            </a>
-            <div>
-              <a href="{% url 'controle' %}">
-                <button>Localizar Animais</button>
-              </a>
-            </div>
-          </div>
+          
           
         </div>
-        <!-- Botão para visualizar o mapa -->
+        
+        
         
         <!-- END Content -->
         {% block footer %}<div id="footer"></div>{% endblock %}
