@@ -37,7 +37,7 @@ A arquitetura do sistema é composta por diferentes elementos:
 - **Aplicação Django:** Consumindo a API do Firebase, a aplicação Django principal utiliza esses dados para plotar a movimentação dos animais no mapa a partir da utilização das coordenadas fornecidas pelo sensor ESP32.
 
 
-![[diagram-flow.png]]
+<img src="diagram-flow.png">
 ## Tecnologias Utilizadas
 
 - **Django:** Framework web utilizado para construir a aplicação.
