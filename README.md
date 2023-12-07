@@ -6,11 +6,7 @@
 - Beatriz Fernandes Teixeira
 ---
 ## Introdução
-Este projeto consiste em uma aplicação que permite o monitoramento de animais numa fazenda. A aplicação utiliza um mapa interativo do Google Maps para permitir que o usuário selecione a região a ser monitorada. As coordenadas do polígono que representam a propriedade são salvas em um banco de dados SQLite.
-
-Após a região ser delimitada, é possível adicionar o identificador MAC de um dispositivo (ESP32) acoplado a um animal. O ESP32 é um arduino que se conecta com o Firebase e envia constantemente a localização (as coordenadas geográficas) para este banco de dados em nuvem.
-
-A partir dos dados enviados pelo ESP32, a aplicação principal em Django consome o Firebase a partir de sua API e plota a movimentação do animal no mapa.
+Este projeto consiste em uma aplicação que permite o monitoramento de animais numa fazenda utilizando um mapa interativo do Google Maps para permitir que o usuário selecione a região a ser monitorada. As coordenadas do polígono que representam a propriedade são salvas em um banco de dados SQLite. Após a região ser delimitada, é possível adicionar o identificador MAC de um dispositivo (ESP32) acoplado a um animal. O ESP32 é um arduino que se conecta com o Firebase e envia constantemente a localização (as coordenadas geográficas) para este banco de dados em nuvem. A partir dos dados enviados pelo ESP32, a aplicação principal em Django consome o Firebase a partir de sua API e plota a movimentação do animal no mapa.
 ## Objetivos
 - **Rastreamento de Movimentos:** Permitir aos usuários delimitar áreas na fazenda e acompanhar a movimentação dos animais nesses espaços.
 - **Integração com Dispositivos IoT:** Facilitar o monitoramento em tempo real por meio da conexão de dispositivos ESP32 acoplados aos animais.
