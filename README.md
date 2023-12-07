@@ -6,11 +6,7 @@
 - Beatriz Fernandes Teixeira
 ---
 ## Introdução
-Este projeto consiste em uma aplicação que permite o monitoramento de animais numa fazenda. A aplicação utiliza um mapa interativo do Google Maps para permitir que o usuário selecione a região a ser monitorada. As coordenadas do polígono que representam a propriedade são salvas em um banco de dados SQLite.
-
-Após a região ser delimitada, é possível adicionar o identificador MAC de um dispositivo (ESP32) acoplado a um animal. O ESP32 é um arduino que se conecta com o Firebase e envia constantemente a localização (as coordenadas geográficas) para este banco de dados em nuvem.
-
-A partir dos dados enviados pelo ESP32, a aplicação principal em Django consome o Firebase a partir de sua API e plota a movimentação do animal no mapa.
+Este projeto consiste em uma aplicação que permite o monitoramento de animais numa fazenda utilizando um mapa interativo do Google Maps para permitir que o usuário selecione a região a ser monitorada. As coordenadas do polígono que representam a propriedade são salvas em um banco de dados SQLite. Após a região ser delimitada, é possível adicionar o identificador MAC de um dispositivo (ESP32) acoplado a um animal. O ESP32 é um arduino que se conecta com o Firebase e envia constantemente a localização (as coordenadas geográficas) para este banco de dados em nuvem. A partir dos dados enviados pelo ESP32, a aplicação principal em Django consome o Firebase a partir de sua API e plota a movimentação do animal no mapa.
 ## Objetivos
 - **Rastreamento de Movimentos:** Permitir aos usuários delimitar áreas na fazenda e acompanhar a movimentação dos animais nesses espaços.
 - **Integração com Dispositivos IoT:** Facilitar o monitoramento em tempo real por meio da conexão de dispositivos ESP32 acoplados aos animais.
@@ -25,7 +21,7 @@ O tipo de arquitetura de sistemas distribuídos utilizado para este projeto é u
 Os clientes são **os dispositivos ESP32**, que enviam as coordenadas geográficas dos animais para o servidor Firebase,  um servidor em nuvem que armazena os dados enviados pelos clientes. **A aplicação Django** é um cliente que acessa os dados armazenados no servidor Firebase e os utiliza para plotar a movimentação dos animais no mapa.
 
 **Servidor**
-O servidor Firebase (Firestore) é um servidor em nuvem que armazena os dados enviados pelos clientes. Os dados são armazenados em um banco de dados NoSQL, que é um tipo de banco de dados não estruturado.
+O servidor Firebase (Firestore) é um banco de dados NoSQL (não estruturado) em nuvem que armazena os dados enviados pelos clientes.
 
 Os dados enviados pelos clientes são armazenados no banco de dados Firestore no formato de documentos. Cada documento representa uma coordenada geográfica de um animal.
 #### Composição do sistema
