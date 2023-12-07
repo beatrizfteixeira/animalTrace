@@ -1,6 +1,6 @@
 {% load i18n static %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
-<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
+<html lang="{{ LANGUAGE_CODE|default:"pt-br" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
 <head>
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}">
@@ -34,7 +34,8 @@
     {% block header %}
     <div id="header">
         <div id="branding">
-        {% block branding %}{% endblock %}
+          <h1>Animal Trace</h1>
+        <!--{% block branding %}{% endblock %}-->
         </div>
         
         {% block usertools %}
@@ -97,23 +98,33 @@
             {% endfor %}</ul>
           {% endif %}
         {% endblock messages %}
-        
         <!-- Content -->
         <div id="content" class="{% block coltype %}colM{% endblock %}">
+          
           {% block pretitle %}{% endblock %}
           {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
           {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
           {% block content %}
             {% block object-tools %}{% endblock %}
+            
             {{ content }}
           {% endblock %}
           {% block sidebar %}{% endblock %}
           <br class="clear">
+          <div>
+            <a href="{% url 'mapa' %}">
+            <button>Salvar Propriedade</button>
+            </a>
+            <div>
+              <a href="{% url 'animal' %}">
+                <button>Localizar Animais</button>
+              </a>
+            </div>
+          </div>
+          
         </div>
         <!-- Botão para visualizar o mapa -->
-        <a href="{% url 'mapa' %}">
-            <button>VISUALIZAR MAPA</button>
-        </a>
+        
         <!-- END Content -->
         {% block footer %}<div id="footer"></div>{% endblock %}
       </div>

@@ -18,7 +18,7 @@ python3 -m venv venv
 ```
 - Ativar ambiente virtual (Windows)
 ``` bash
-venv\Scripts\activate.bat
+venv/Scripts/activate.bat
 ```
 - Ativar ambiente virtual (Linux)
 ``` bash
