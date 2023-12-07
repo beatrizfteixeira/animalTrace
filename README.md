@@ -38,10 +38,12 @@ A arquitetura do sistema é composta por diferentes elementos:
 
 
 <img src="diagram-flow.png">
+
+
 ## Tecnologias Utilizadas
 
 - **Django:** Framework web utilizado para construir a aplicação.
-- **SQLite:** Banco de dados utilizado para armazenar as coordenadas das áreas delimitadas.
+- **SQLite (já embutido no Django):** Banco de dados utilizado para armazenar as coordenadas das áreas delimitadas.
 - **Firebase:** Banco de dados em nuvem usado para armazenar as coordenadas de localização enviadas pelos sensores ESP32.
 - **Google Maps API (Drawing Tools):** API usada para a interatividade do usuário na seleção das áreas no mapa.
 - **PlatformIO (Extensão do VS Code):** Utilizado para gerenciar as operações do dispositivo ESP32.
