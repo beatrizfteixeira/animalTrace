@@ -97,12 +97,10 @@ pip install -r requirements.txt
 ```bash
 python manage.py runserver
 ```
-<<<<<<< HEAD
 - Acessar: http://localhost:8000/admin/login/?next=/admin/
-=======
+
 3. Configure as chaves da API do Google Maps e do Firebase alterando o valor das variáveis no arquivo `.env`
 ### Execução
 1. Navegue até o diretório raiz do projeto.
 2. Execute o servidor Django: `python manage.py runserver`.
 3. Acesse a aplicação em um navegador: `http://localhost:8000/admin/login/?next=/admin/`.
->>>>>>> 7ce8d423f419a75a0eb59c08f1662f781b1204a6
