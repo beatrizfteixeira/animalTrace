@@ -32,4 +32,4 @@ pip install -r requirements.txt
 ```bash
 python manage.py runserver
 ```
-- Acessar: http://127.0.0.1:8000/mapa
+- Acessar: http://localhost:8000/admin/login/?next=/admin/
