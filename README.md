@@ -21,7 +21,7 @@ O tipo de arquitetura de sistemas distribuídos utilizado para este projeto é u
 Os clientes são **os dispositivos ESP32**, que enviam as coordenadas geográficas dos animais para o servidor Firebase,  um servidor em nuvem que armazena os dados enviados pelos clientes. **A aplicação Django** é um cliente que acessa os dados armazenados no servidor Firebase e os utiliza para plotar a movimentação dos animais no mapa.
 
 **Servidor**
-O servidor Firebase (Firestore) é um servidor em nuvem que armazena os dados enviados pelos clientes. Os dados são armazenados em um banco de dados NoSQL, que é um tipo de banco de dados não estruturado.
+O servidor Firebase (Firestore) é um banco de dados NoSQL (não estruturado) em nuvem que armazena os dados enviados pelos clientes.
 
 Os dados enviados pelos clientes são armazenados no banco de dados Firestore no formato de documentos. Cada documento representa uma coordenada geográfica de um animal.
 #### Composição do sistema
