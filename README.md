@@ -93,7 +93,6 @@ pip install -r requirements.txt
 ```bash
 python manage.py runserver
 ```
-<<<<<<< HEAD
 - Acessar: http://localhost:8000/admin/login/?next=/admin/
 =======
 3. Configure as chaves da API do Google Maps e do Firebase alterando o valor das variáveis no arquivo `.env`
@@ -101,4 +100,35 @@ python manage.py runserver
 1. Navegue até o diretório raiz do projeto.
 2. Execute o servidor Django: `python manage.py runserver`.
 3. Acesse a aplicação em um navegador: `http://localhost:8000/admin/login/?next=/admin/`.
->>>>>>> 7ce8d423f419a75a0eb59c08f1662f781b1204a6
+
+---
+# Instruções para Executar o Código ESP32 no Firebase
+
+Este projeto utiliza um ESP32 para se conectar ao Wi-Fi e enviar coordenadas fictícias para o Firebase. Siga as etapas abaixo para configurar e executar o código.
+
+## Pré-requisitos
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [PlatformIO Extension](https://platformio.org/install/ide?install=vscode)
+
+## Configuração do Projeto
+
+1. Instale a extensão PlatformIO no Visual Studio Code usando o [link recomendado](https://platformio.org/install/ide?install=vscode).
+2. Crie um novo projeto no PlatformIO, selecionando a placa `DOIT ESP DEVKIT V1` e o framework `Arduino`.
+3. Copie o código presente na pasta `ESP32`, no arquivo `main.cpp`, para o arquivo `src/main.cpp` do seu projeto no PlatformIO.
+
+## Adição da Biblioteca Firebase
+
+4. Importe a biblioteca *Firebase Arduino Client Library for ESP8266 and ESP32* no seu projeto.
+
+## Configuração do Firebase
+
+5. Crie um projeto no Firebase e obtenha a `API_KEY` e a `DATABASE_URL`.
+6. Substitua os campos `API_KEY` e `DATABASE_URL` no código pelo valor obtido do Firebase.
+7. Configure as variáveis `WIFI_SSID` e `WIFI_PASSWD` com o nome e senha da sua rede Wi-Fi.
+
+## Compilação e Execução
+
+8. Construa e compile o código utilizando as opções fornecidas pelo PlatformIO.
+
+Com estas etapas, o seu projeto estará pronto para enviar coordenadas fictícias para o Firebase usando o ESP32. Certifique-se de ajustar qualquer outra configuração específica do seu projeto, se necessário.
