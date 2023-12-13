@@ -64,15 +64,19 @@
                 </form>
                 {% include "admin/color_theme_toggle.html" %}
 
-                <div>
+                <div style="padding-top: 20px">
                   <a href="{% url 'mapa' %}">
-                      <button style="background-color: #81D4FA;">Salvar Propriedade</button>
+                      <button style="background-color: #264B5D; border: none; color: #F7F7F7;">
+                        <p style="margin: 5px 5px 5px 5px;">Salvar Propriedade</p>
+                      </button>
                   </a>
-                  <div>
-                      <a href="{% url 'controle' %}">
-                          <button style="background-color: #81D4FA;">Localizar Animais</button>
-                      </a>
-                  </div>
+                  
+                  <a href="{% url 'controle' %}">
+                      <button style="background-color: #264B5D; border: none; color: #F7F7F7;">
+                        <p style="margin: 5px 5px 5px 5px;">Localizar Animais</p>
+                      </button>
+                  </a>
+                  
                 </div>
               <!-- Fim dos botões -->
             {% endblock %}

@@ -27,14 +27,6 @@ def mapa(request):
     }
     return render(request, 'mapa.html', context)
 
-
-def login(request):
-    return render(request, 'login.html')
-
-
-def signup(request):
-    return render(request, 'signup.html')
-
 def obter_informacoes_firebase():
     # Obtém todas as chaves e valores da raiz do Firebase
     root_data = database.child('/').get().val()
